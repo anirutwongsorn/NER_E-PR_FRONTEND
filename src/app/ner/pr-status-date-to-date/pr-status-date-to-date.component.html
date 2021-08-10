@@ -1,0 +1,202 @@
+<mat-card>
+    <form #prForm="ngForm" (submit)="onSubmit(prForm)">
+        <mat-card-header>
+            <mat-card-title class="d-flex justify-content-between align-items-center">
+                <span>PR history</span>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content class="py-3 px-2">
+            <div class="row">
+                <div class="col-md-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>จากวันที่</mat-label>
+                        <input ngModel name="dFrom" matInput type="date" required />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>ถึงวันที่</mat-label>
+                        <input ngModel name="dTo" matInput type="date" required />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <div class="d-flex flex-column justify-content-center h-100 w-50">
+                        <button mat-raised-button class="alert-success" type="submit">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </form>
+</mat-card>
+
+<div class="mat-elevation-z8 mt-3 table-responsive">
+    <div class="d-flex align-items-center justify-content-between p-3 search_form">
+        <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Search...</mat-label>
+            <input [(ngModel)]="textSearch" (keyup)="search($event)" matInput placeholder="Purchase request" />
+            <mat-icon matSuffix *ngIf="!textSearch">search</mat-icon>
+            <button (click)="clearSearch()" mat-icon-button matSuffix *ngIf="textSearch">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <button mat-raised-button (click)="exportexcel()" class="bg-white ml-2 mr-4" type="button">
+            <mat-icon>file_download</mat-icon>
+            Export to Excel
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table id="allprPendingitem" mat-table [dataSource]="dataSource"
+            class="table table-striped table-hover table-bordered table-sm w-100">
+
+            <ng-container matColumnDef="prNo">
+                <th mat-header-cell *matHeaderCellDef>เลขที่ PR</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.prNo }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prStatus">
+                <th mat-header-cell *matHeaderCellDef class="text-center">สถานะ</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prStatus }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prType">
+                <th mat-header-cell *matHeaderCellDef class="text-center">ประเภท</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prType }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fullName">
+                <th mat-header-cell *matHeaderCellDef>ชื่อ-สกุล</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.fullName }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateCreated">
+                <th mat-header-cell *matHeaderCellDef>วันที่ PR</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.dateCreated }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="timeCreated">
+                <th mat-header-cell *matHeaderCellDef class="text-center">เวลา</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.timeCreated }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="deptSymbol">
+                <th mat-header-cell *matHeaderCellDef class="text-center">แผนก</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.deptSymbol }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="division">
+                <th mat-header-cell *matHeaderCellDef>แผนก</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.division }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="remark">
+                <th mat-header-cell *matHeaderCellDef>หมายเหตุ</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.remark }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="approveName">
+                <th mat-header-cell *matHeaderCellDef>ผู้ตรวจสอบ</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.approveName }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="approveDate">
+                <th mat-header-cell *matHeaderCellDef>วันที่</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.approveDate }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="approveTime">
+                <th mat-header-cell *matHeaderCellDef class="text-center">เวลา</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.approveTime }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pdCode">
+                <th mat-header-cell *matHeaderCellDef>รหัส</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.pdCode }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pdDetail">
+                <th mat-header-cell *matHeaderCellDef>Descripntion</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.pdDetail }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="qty">
+                <th mat-header-cell *matHeaderCellDef class="text-center">Quantity</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.qty | number: "1.2-2" }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="keeping">
+                <th mat-header-cell *matHeaderCellDef class="text-center">UOM</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.keeping }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="bdgCode">
+                <th mat-header-cell *matHeaderCellDef>Bdg. Code</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.bdgCode }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="objective">
+                <th mat-header-cell *matHeaderCellDef>Objective</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.objective }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="po">
+                <th mat-header-cell *matHeaderCellDef class="text-center">PO*</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.po }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="poDate">
+                <th mat-header-cell *matHeaderCellDef class="text-center">วันที่ PO</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.poDate }}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumn"></tr>
+        </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[15, 25, 50, 100, 500, 1000, 5000]"></mat-paginator>
+</div>

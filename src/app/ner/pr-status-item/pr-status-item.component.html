@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-3">
+        <mat-card class="d-flex align-items-center gradient-light-blue">
+            <img class="icon mr-2" src="assets/images/writing.png" alt="" height="80" />
+            <div class="d-flex flex-column">
+                <div class="h5 mb-0">Opening</div>
+                <div class="h2 mb-0">{{prSummaryReport.prPending | number}}</div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3">
+        <mat-card class="d-flex align-items-center gradient-light-blue">
+            <img class="icon mr-2" src="assets/images/schedule.png" alt="" height="80" />
+            <div class="d-flex flex-column">
+                <div class="h5 mb-0">Pending</div>
+                <div class="h2 mb-0">{{prSummaryReport.prChecked | number}}</div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3">
+        <mat-card class="d-flex align-items-center gradient-light-blue">
+            <img class="icon mr-2" src="assets/images/approved.png" alt="" height="80" />
+            <div class="d-flex flex-column">
+                <div class="h5 mb-0">Approved</div>
+                <div class="h2 mb-0">{{prSummaryReport.prApproved | number}}</div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3">
+        <mat-card class="d-flex align-items-center gradient-light-blue">
+            <img class="icon mr-2" src="assets/images/checklist.png" alt="" height="80" />
+            <div class="d-flex flex-column">
+                <div class="h5 mb-0">Completed</div>
+                <div class="h2 mb-0">{{prSummaryReport.prCompleted | number}}</div>
+            </div>
+        </mat-card>
+    </div>
+</div>

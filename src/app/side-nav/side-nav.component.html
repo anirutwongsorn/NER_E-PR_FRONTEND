@@ -1,0 +1,45 @@
+<div class="m-4">
+  <img class="img-fluid bg-white shadow-sm" src="assets/images/NER_logo.png" />
+</div>
+
+<mat-nav-list dense class="mt-2">
+  <a mat-list-item [routerLink]="['/nerubber/overview']" (click)="onclickNavClose()">
+    <span mat-line><span class="mat-h4">Dashboard</span></span>
+    <mat-icon>dashboard</mat-icon>
+    <!-- <img mat-list-avatar src="assets/images/speedometer.png" alt="" /> -->
+  </a>
+  <mat-divider class="mt-4"></mat-divider>
+  <h3 mat-subheader>PR pending</h3>
+  <a mat-list-item [routerLink]="['/nerubber/prpending']" (click)="onclickNavClose()">
+    <span mat-line><span class="mat-h4">All</span></span>
+    <!-- <img mat-list-avatar src="assets/images/list.png" alt="" /> -->
+    <mat-icon>list_alt</mat-icon>
+  </a>
+  <a mat-list-item [routerLink]="['/nerubber/prpendingByDepartment']" (click)="onclickNavClose()">
+    <span mat-line><span class="mat-h4">By Department</span></span>
+    <mat-icon>account_tree</mat-icon>
+    <!-- <img mat-list-avatar src="assets/images/hierarchical-structure.png" alt="" /> -->
+  </a>
+  <a mat-list-item [routerLink]="['/nerubber/prpendingItem']" (click)="onclickNavClose()">
+    <span mat-line><span class="mat-h4">By Items</span></span>
+    <mat-icon>category</mat-icon>
+    <!-- <img mat-list-avatar src="assets/images/hierarchical-structure.png" alt="" /> -->
+  </a>
+  <mat-divider class="mt-4"></mat-divider>
+  <h3 mat-subheader>History</h3>
+  <a mat-list-item [routerLink]="['/nerubber/prhistory']">
+    <span mat-line><span class="mat-h4">PR history</span></span>
+    <mat-icon>history</mat-icon>
+  </a>
+
+  <mat-divider class="mt-4"></mat-divider>
+  <h3 mat-subheader>Setting</h3>
+  <a mat-list-item [routerLink]="['/nerubber/timesetting']">
+    <span mat-line><span class="mat-h4">Time period</span></span>
+    <mat-icon>timer</mat-icon>
+  </a>
+  <!-- <a mat-list-item href="#">
+    <span mat-line><span class="mat-h4">Customer</span></span>
+    <img mat-list-avatar src="https://image.flaticon.com/icons/png/512/2312/2312681.png" alt="" />
+  </a> -->
+</mat-nav-list>

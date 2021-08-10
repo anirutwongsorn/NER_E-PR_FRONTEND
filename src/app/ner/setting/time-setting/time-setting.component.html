@@ -1,0 +1,67 @@
+<div class="container">
+
+    <div class="w-100 card">
+        <ul class="timeline">
+
+            <!-- Item 1 -->
+            <li>
+                <div class="direction-r">
+                    <div class="flag-wrapper">
+                        <span class="flag">{{timePeriodSetting.initTime}}</span>
+                        <span class="time-wrapper"><span class="time">เริ่มต้นปิดระบบ</span></span>
+                    </div>
+                    <div class="desc">สามารถส่งใบขอซื้อได้จนถึง เวลา {{timePeriodSetting.previousTime}}</div>
+                </div>
+            </li>
+
+
+            <!-- Item 3 -->
+            <li>
+                <div class="direction-r">
+                    <div class="flag-wrapper">
+                        <span class="flag">{{timePeriodSetting.endTime}}</span>
+                        <span class="time-wrapper"><span class="time">สิ้นสุดการปิดระบบ</span></span>
+                    </div>
+                    <div class="desc">สามารถส่งใบขอซื้อได้อีกครั้งตั้งแต่ เวลา {{timePeriodSetting.nextTime}} เป็นต้นไป</div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <br>
+    <mat-card>
+        <form #productForm="ngForm" (submit)="onSubmit(productForm)">
+            <mat-card-header>
+                <mat-card-title class="d-flex justify-content-between align-items-center">
+                    <span>Time period setting</span>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-content class="py-3 px-2">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>จากเวลา</mat-label>
+                            <input ngModel name="dFrom" matInput type="time" required />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>ถึงเวลา</mat-label>
+                            <input ngModel name="dTo" matInput type="time" required />
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-card-content>
+            <hr>
+            <div class="d-flex justify-content-center">
+                <button mat-raised-button class="alert-success ml-2 mr-2" type="submit">
+                    <mat-icon>save</mat-icon>
+                    บันทึกการเปลี่ยนแปลง
+                </button>
+            </div>
+
+        </form>
+    </mat-card>
+
+</div>

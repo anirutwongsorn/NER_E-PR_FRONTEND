@@ -1,0 +1,4 @@
+.mat-nav-list .mat-focus-indicator:focus {
+  color: white;
+  background-color: lightseagreen;
+}

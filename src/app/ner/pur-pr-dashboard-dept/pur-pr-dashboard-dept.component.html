@@ -1,0 +1,91 @@
+<app-pr-status></app-pr-status>
+<div class="mat-elevation-z8 mt-3 table-responsive card">
+    <div class="d-flex align-items-center justify-content-between p-3 search_form">
+        <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Search...</mat-label>
+            <input [(ngModel)]="textSearch" (keyup)="search($event)" matInput placeholder="Purchase request" />
+            <mat-icon matSuffix *ngIf="!textSearch">search</mat-icon>
+            <button (click)="clearSearch()" mat-icon-button matSuffix *ngIf="textSearch">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <button mat-raised-button (click)="exportexcel()" class="bg-white ml-2 mr-4" type="button">
+            <mat-icon>file_download</mat-icon>
+            Export to Excel
+        </button>
+    </div>
+    <div class="table-responsive">
+        <table id ="prPending" mat-table [dataSource]="dataSource" class="table-striped table-hover w-100">
+
+            <ng-container matColumnDef="deptCode">
+                <th mat-header-cell *matHeaderCellDef>รหัส</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    <a [routerLink]="['/nerubber/prpendingbydepartment/' + data.deptCode]"
+                        routerLinkActive="router-link-active">{{ data.deptCode }}</a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="deptSymbol">
+                <th mat-header-cell *matHeaderCellDef class="text-center">คำย่อ</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.deptSymbol }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prStatus">
+                <th mat-header-cell *matHeaderCellDef class="text-truncate">สถานะ</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.prStatus }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="division">
+                <th mat-header-cell *matHeaderCellDef class="text-truncate">แผนก</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.division }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prAll">
+                <th mat-header-cell *matHeaderCellDef class="text-center">PR ทั้งหมด</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prAll | number }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prApproved">
+                <th mat-header-cell *matHeaderCellDef class="text-center">อนุมัติ PO</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prApproved | number }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prCompleted">
+                <th mat-header-cell *matHeaderCellDef class="text-center">บันทึกงบฯ</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prCompleted | number }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prChecked">
+                <th mat-header-cell *matHeaderCellDef class="text-center">คงค้าง</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prChecked | number }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prKpi">
+                <th mat-header-cell *matHeaderCellDef class="text-center">Eff.</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prKpi | number }}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumn"></tr>
+        </table>
+    </div>
+    <mat-paginator [length]="10" [pageSizeOptions]="[15, 25, 50, 100]">
+    </mat-paginator>
+</div>

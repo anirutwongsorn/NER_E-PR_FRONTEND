@@ -1,0 +1,216 @@
+<app-pr-status></app-pr-status>
+
+<div class="card gradient-light-blue p-2">
+    <apx-chart [series]="groupChartOptions.series" [chart]="groupChartOptions.chart"
+        [dataLabels]="groupChartOptions.dataLabels" [plotOptions]="groupChartOptions.plotOptions"
+        [xaxis]="groupChartOptions.xaxis" [stroke]="groupChartOptions.stroke" [fill]="groupChartOptions.fill"
+        [yaxis]="groupChartOptions.yaxis" [title]="groupChartOptions.title" [legend]="groupChartOptions.legend"
+        [grid]="groupChartOptions.grid"></apx-chart>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="d-flex flex-column justify-content-center h-100 card gradient-light-blue p-2">
+            <div class="chart-wrapper">
+                <div id="donutChart">
+                    <apx-chart [series]="donutChartOptions.series" [chart]="donutChartOptions.chart"
+                        [fill]="donutChartOptions.fill" [labels]="donutChartOptions.labels"
+                        [responsive]="donutChartOptions.responsive" [markers]="donutChartOptions.markers"
+                        [legend]="donutChartOptions.legend" [colors]="donutChartOptions.colors"
+                        [title]="donutChartOptions.title"></apx-chart>
+                </div>
+
+                <!-- <canvas baseChart height="150" [data]="doughnutChartData" [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType" [colors]="doughnutColors">
+                </canvas> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="d-flex flex-column justify-content-center h-100 card gradient-light-blue p-2">
+            <div class="chart-wrapper">
+
+                <apx-chart [series]="lineChartOptions.series" [chart]="lineChartOptions.chart"
+                    [xaxis]="lineChartOptions.xaxis" [stroke]="lineChartOptions.stroke"
+                    [colors]="lineChartOptions.colors" [dataLabels]="lineChartOptions.dataLabels"
+                    [legend]="lineChartOptions.legend" [markers]="lineChartOptions.markers"
+                    [grid]="lineChartOptions.grid" [yaxis]="lineChartOptions.yaxis" [title]="lineChartOptions.title">
+                </apx-chart>
+                <!-- <canvas baseChart height="90" [datasets]="lineChartData" [labels]="lineChartLabels"
+                    [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+                    [plugins]="lineChartPlugins">
+                </canvas> -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<br>
+
+<div style="text-align:center">
+    <div class="card gradient-light-blue p-2 pr-3">
+        <apx-chart [series]="barChartOptions.series" [chart]="barChartOptions.chart"
+            [dataLabels]="barChartOptions.dataLabels" [plotOptions]="barChartOptions.plotOptions"
+            [yaxis]="barChartOptions.yaxis" [xaxis]="barChartOptions.xaxis" [stroke]="barChartOptions.stroke"
+            [grid]="barChartOptions.grid" [fill]="barChartOptions.fill" [title]="barChartOptions.title"></apx-chart>
+    </div>
+</div>
+<br>
+
+
+<div class="mat-elevation-z8 mt-3 table-responsive card">
+    <div class="card bg-primary text-white">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+                <b>สรุป PR ทั้งหมด</b>
+
+                <button mat-raised-button (click)="exportexcel()" class="bg-white ml-2 mr-4" type="button">
+                    <mat-icon>file_download</mat-icon>
+                    Export to Excel
+                </button>
+            </div>
+        </div>
+      </div>
+
+
+    <div id="allprPending" class="table-responsive">
+        <table mat-table [dataSource]="dataSource" class="table-striped table-hover w-100">
+
+            <ng-container matColumnDef="prYear">
+                <th mat-header-cell *matHeaderCellDef class="text-truncate">ปี/เดือน</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.prYear }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prAll">
+                <th mat-header-cell *matHeaderCellDef class="text-center">PR ทั้งหมด</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prAll }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prApproved">
+                <th mat-header-cell *matHeaderCellDef class="text-center">อนุมัติ</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prApproved }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prCompleted">
+                <th mat-header-cell *matHeaderCellDef class="text-center">จัดซื้อแล้ว</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prCompleted }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prChecked">
+                <th mat-header-cell *matHeaderCellDef class="text-center">คงค้าง</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prChecked }}
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumn"></tr>
+        </table>
+    </div>
+
+</div>
+
+<div class="mat-elevation-z8 mt-3 table-responsive card">
+    <div class="card bg-primary text-white">
+        <div class="card-body"><b>สรุป PR แยกตามแผนก</b></div>
+      </div>
+    <div class="d-flex align-items-center justify-content-between p-3 search_form">
+        <mat-form-field appearance="outline" class="w-50">
+            <mat-label>Search...</mat-label>
+            <input [(ngModel)]="textSearch" (keyup)="search($event)" matInput placeholder="Purchase request" />
+            <mat-icon matSuffix *ngIf="!textSearch">search</mat-icon>
+            <button (click)="clearSearch()" mat-icon-button matSuffix *ngIf="textSearch">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <button mat-raised-button (click)="exportexcelDept()" class="bg-white ml-2 mr-4" type="button">
+            <mat-icon>file_download</mat-icon>
+            Export to Excel
+        </button>
+    </div>
+    <div class="table-responsive">
+        <table id="prPendingDept" mat-table [dataSource]="dataSourceDept" class="table-striped table-hover w-100">
+
+            <ng-container matColumnDef="prYear">
+                <th mat-header-cell *matHeaderCellDef>ปี/เดือน</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.prYear }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="deptCode">
+                <th mat-header-cell *matHeaderCellDef>รหัส</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.deptCode }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="deptSymbol">
+                <th mat-header-cell *matHeaderCellDef class="text-center">คำย่อ</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.deptSymbol }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prStatus">
+                <th mat-header-cell *matHeaderCellDef class="text-truncate">สถานะ</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.prStatus }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="division">
+                <th mat-header-cell *matHeaderCellDef class="text-truncate">แผนก</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.division }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prAll">
+                <th mat-header-cell *matHeaderCellDef class="text-center">PR ทั้งหมด</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prAll | number }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prApproved">
+                <th mat-header-cell *matHeaderCellDef class="text-center">อนุมัติ PO</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prApproved | number }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prCompleted">
+                <th mat-header-cell *matHeaderCellDef class="text-center">บันทึกงบฯ</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prCompleted | number }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prChecked">
+                <th mat-header-cell *matHeaderCellDef class="text-center">คงค้าง</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.prChecked | number }}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedDeptColumn"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedDeptColumn"></tr>
+        </table>
+    </div>
+    <mat-paginator [length]="15" [pageSizeOptions]="[15, 25, 50, 100, 250, 500]">
+    </mat-paginator>
+</div>

@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <button mat-button (click)="onClickNavToggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span *ngIf="!mobileQueryMax">E-PR</span>
+  <span class="flex-fill"></span>
+
+  <div class="d-flex align-items-center">
+    <div class="vl"></div>
+
+    <button mat-button [matMenuTriggerFor]="menu">
+      <img class="avatar rounded-circle bg-white" src="assets/images/user_logo.png" />
+      <span class="ml-2">{{fullName}}</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

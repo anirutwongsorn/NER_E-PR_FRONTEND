@@ -1,0 +1,149 @@
+<div class="card bg-info text-white">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h1 style="margin-bottom: 0%;">{{DeptDesc}}</h1>
+      <button mat-raised-button class="bg-white ml-2 mr-4" type="button" (click)="backToPrevious()">
+        <mat-icon>arrow_back</mat-icon>
+        ย้อนกลับ
+    </button>
+    </div> 
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-3">
+    <mat-card class="d-flex align-items-center gradient-light-blue">
+      <img class="icon mr-2" src="assets/images/writing.png" alt="" height="80" />
+      <div class="d-flex flex-column">
+        <div class="h5 mb-0">Opening</div>
+        <div class="h2 mb-0">{{sumPending | number}}</div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-md-3">
+    <mat-card class="d-flex align-items-center gradient-light-blue">
+      <img class="icon mr-2" src="assets/images/schedule.png" alt="" height="80" />
+      <div class="d-flex flex-column">
+        <div class="h5 mb-0">Pending</div>
+        <div class="h2 mb-0">{{sumChecked | number}}</div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-md-3">
+    <mat-card class="d-flex align-items-center gradient-light-blue">
+      <img class="icon mr-2" src="assets/images/approved.png" alt="" height="80" />
+      <div class="d-flex flex-column">
+        <div class="h5 mb-0">Approved</div>
+        <div class="h2 mb-0">{{sumApproved | number}}</div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-md-3">
+    <mat-card class="d-flex align-items-center gradient-light-blue">
+      <img class="icon mr-2" src="assets/images/checklist.png" alt="" height="80" />
+      <div class="d-flex flex-column">
+        <div class="h5 mb-0">Completed</div>
+        <div class="h2 mb-0">{{sumCompleted | number}}</div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<div class="mat-elevation-z8 mt-3 table-responsive">
+  <div class="d-flex align-items-center p-3 search_form">
+    <mat-form-field appearance="outline" class="w-50">
+      <mat-label>Search...</mat-label>
+      <input [(ngModel)]="textSearch" (keyup)="search($event)" matInput placeholder="Purchase request" />
+      <mat-icon matSuffix *ngIf="!textSearch">search</mat-icon>
+      <button (click)="clearSearch()" mat-icon-button matSuffix *ngIf="textSearch">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" class="table-striped table-hover w-100">
+
+      <ng-container matColumnDef="prNo">
+        <th mat-header-cell *matHeaderCellDef>เลขที่</th>
+        <td mat-cell *matCellDef="let data" class="text-truncate">
+          {{ data.prNo }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="prType">
+        <th mat-header-cell *matHeaderCellDef class="text-center">ประเภท</th>
+        <td mat-cell *matCellDef="let data" class="text-center">
+          {{ data.prType }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef class="text-truncate">ผู้ขอซื้อ</th>
+        <td mat-cell *matCellDef="let data" class="text-truncate">
+          {{ data.fullName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateCreated">
+        <th mat-header-cell *matHeaderCellDef class="text-center">วันที่</th>
+        <td mat-cell *matCellDef="let data" class="text-center">
+          {{ data.dateCreated }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="timeCreated">
+        <th mat-header-cell *matHeaderCellDef class="text-center">เวลา</th>
+        <td mat-cell *matCellDef="let data" class="text-center">
+          {{ data.timeCreated }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="approveName">
+        <th mat-header-cell *matHeaderCellDef>ผู้อนุมัติ</th>
+        <td mat-cell *matCellDef="let data" class="text-truncate">
+          {{ data.approveName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="approveDate">
+        <th mat-header-cell *matHeaderCellDef class="text-center">วันที่อนุมัติ</th>
+        <td mat-cell *matCellDef="let data" class="text-center">
+          {{ data.approveDate }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="approveTime">
+        <th mat-header-cell *matHeaderCellDef class="text-center">เวลา</th>
+        <td mat-cell *matCellDef="let data" class="text-center">
+          {{ data.approveTime }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="itemCount">
+        <th mat-header-cell *matHeaderCellDef class="text-center">จำนวน</th>
+        <td mat-cell *matCellDef="let data" class="text-center">
+          {{ data.itemCount }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="text-center">ดำเนินการ</th>
+        <td mat-cell *matCellDef="let data" class="text-center">
+          <button mat-button (click)="cancelPr(data)" style="color: red;">
+            <mat-icon>cancel</mat-icon>
+          </button>
+          <button mat-button (click)="gotoNextPage(data)">
+            <mat-icon class="material-icons-outlined" style="color: rgb(115, 141, 0);"> edit </mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumn"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [length]="200" [pageSizeOptions]="[10, 25, 50, 75, 100, 200, 500]">
+  </mat-paginator>
+</div>

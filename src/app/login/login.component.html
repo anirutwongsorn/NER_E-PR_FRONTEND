@@ -1,0 +1,38 @@
+<div class="d-flex flex-column justify-content-center h-100 gradient-light-blue">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <img class="mx-auto d-block w-100 m-4" src="assets/images/e_pr.png">
+
+                        <form #f="ngForm" *ngIf="!isLoggedIn" name="form" (submit)="onSubmit(f)" novalidate>
+                            <div class="form-group">
+                                <label for="username">Email</label>
+                                <input ngModel type="text" class="form-control" name="username" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input ngModel type="password" class="form-control" name="password" required
+                                    minlength="5" />
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    Login
+                                </button>
+                            </div>
+                            <div class="form-group">
+                                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                                    Login failed: {{ errorMessage }}
+                                </div>
+                            </div>
+                        </form>
+                        <div class="d-flex justify-content-center">
+                            <p>Develop by Anirut.wo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,225 @@
+<mat-card class="gradient-light-blue">
+    <mat-card-title class="d-flex justify-content-center align-items-center">
+        <span>Purchase request</span>
+    </mat-card-title>
+    <mat-card-content class="py-3 px-2 mr-2">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">เลชที่ PR</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="prno"> -->
+                    <span class="form-control"><b>{{prno}}</b></span>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">วัตถุประสงค์</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="prType"> -->
+                    <span class="form-control"><b>{{prType}}</b></span>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">วันที่ต้องการ</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="dateNeed"> -->
+                    <span class="form-control"><b>{{dateNeed}}</b></span>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">ผู้ขอซื้อ</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="fullName"> -->
+                    <span class="form-control"><b>{{fullName}}</b></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">วันที่ขอซื้อ</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="dateCreated"> -->
+                    <span class="form-control"><b>{{dateCreated}}</b></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">เวลา</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="timeCreated"> -->
+                    <span class="form-control"><b>{{timeCreated}}</b></span>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">ผู้ตรวจสอบ</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="approveName"> -->
+                    <span class="form-control"><b>{{approveName}}</b></span>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">วันที่ตรวจสอบ</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="approveDate"> -->
+                    <span class="form-control"><b>{{approveDate}}</b></span>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">เวลา</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="approveTime"> -->
+                    <span class="form-control"><b>{{approveTime}}</b></span>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">หมายเหตุ</span>
+                    </div>
+                    <!-- <input type="text" disabled class="form-control" [value]="remark"> -->
+                    <span class="form-control"><b>{{remark}}</b></span>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">วันที่รับเข้าระบบ</span>
+                    </div>
+                    <span class="form-control"><b>{{acknDate}}</b></span>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group m-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">ผู้ทำรายการ</span>
+                    </div>
+                    <span class="form-control"><b>{{acknName}}</b></span>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+    <div class="d-flex justify-content-center">
+        <button mat-raised-button class="bg-white ml-2 mr-4" type="button" (click)="backToPrevious()">
+            <mat-icon>arrow_back</mat-icon>
+            ย้อนกลับ
+        </button>
+        <button mat-raised-button class="alert-danger ml-2 mr-2" type="button" (click)="cancelPr()">
+            <mat-icon>cancel</mat-icon>
+            ยกเลิก PR
+        </button>
+        <button mat-raised-button class="alert-warning ml-2 mr-2" type="button" (click)="returnToPending()">
+            <mat-icon>replay</mat-icon>
+            ดำเนินการแก้ไข
+        </button>
+        <button mat-raised-button class="alert-info ml-2 mr-2" type="button" (click)="acknowledgePr()">
+            <mat-icon>task</mat-icon>
+            รับ PR เข้าระบบจัดซื้อ
+        </button>
+        <button mat-raised-button class="alert-success ml-2 mr-2" type="button" (click)="approvePr()">
+            <mat-icon>task_alt</mat-icon>
+            ปิดการสั่งซื้อ
+        </button>
+    </div>
+</mat-card>
+
+<div class="mat-elevation-z8 mt-3 table-responsive">
+
+    <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource" class="table-striped table-hover w-100">
+
+            <ng-container matColumnDef="pdCode">
+                <th mat-header-cell *matHeaderCellDef>Item code</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.pdCode }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pdDetail">
+                <th mat-header-cell *matHeaderCellDef>Descripntion</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.pdDetail }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="qty">
+                <th mat-header-cell *matHeaderCellDef class="text-center">Quantity</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.qty | number: "1.2-2" }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="keeping">
+                <th mat-header-cell *matHeaderCellDef class="text-center">UOM</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.keeping }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="bdgCode">
+                <th mat-header-cell *matHeaderCellDef>Bdg. Code</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.bdgCode }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="objective">
+                <th mat-header-cell *matHeaderCellDef>Objective</th>
+                <td mat-cell *matCellDef="let data" class="text-truncate">
+                    {{ data.objective }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="po">
+                <th mat-header-cell *matHeaderCellDef class="text-center">PO*</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    {{ data.po }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="text-center">Action</th>
+                <td mat-cell *matCellDef="let data" class="text-center">
+                    <button mat-button (click)="onCancelItem(data)">
+                        <mat-icon style="color: red;">block</mat-icon>
+                    </button>
+                    <button mat-button (click)="openDialog(data.item)">
+                        <mat-icon style="color: green;">check_circle</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumn"></tr>
+        </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+</div>

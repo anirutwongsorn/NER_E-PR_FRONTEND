@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+:focus:focus {
+  outline: unset;
+}
+
+.snackbar {
+  color: white;
+}
+
+.snackbar-success {
+  color: green;
+}
+
+.snackbar-error {
+  color: red;
+}
+
+.custom-backdrop.custom-backdrop {
+  background-color: black;
+  opacity: 0.6;
+}
+
+.mat-card {
+  margin-bottom: 20px;
+}
+
+.gradient-light-blue {
+  /* fallback for old browsers */
+  background: #4facfe;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to bottom,
+    rgba(79, 172, 254, 0.5),
+    rgba(221, 238, 228, 0.5)
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(
+    to bottom,
+    rgba(79, 172, 254, 0.5),
+    rgba(221, 238, 228, 0.5)
+  );
+}
